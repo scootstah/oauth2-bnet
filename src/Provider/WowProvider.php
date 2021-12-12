@@ -12,7 +12,7 @@ class WowProvider extends BattleNet
 
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return "https://{$this->region}.api.battle.net/profile/user/wow?namespace=profile-us&locale=en_US&access_token={$token}";
+        return "https://{$this->region}.api.blizzard.com/profile/user/wow?namespace=profile-us&locale=en_US&access_token={$token}";
     }
 
     protected function createResourceOwner(array $response, AccessToken $token)
