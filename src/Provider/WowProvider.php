@@ -51,8 +51,7 @@ class WowProvider extends BattleNet
 
         if ($response) {
             $accounts = [];
-            $data = json_decode($response, true);
-            foreach ($data['wow_accounts'] as $account) {
+            foreach ($response['wow_accounts'] as $account) {
                 $characters = [];
                 foreach ($account['characters'] as $character) {
                     $characters[] = (new WowCharacter([
@@ -73,9 +72,7 @@ class WowProvider extends BattleNet
                 $accounts[] = (new WowAccount($account['id'], $characters));
             }
 
-            $profile = (new WowProfile($data['id'], $accounts));
-
-            return $profile;
+            return (new WowProfile($response['id'], $accounts));
         }
 
         throw new \UnexpectedValueException(
