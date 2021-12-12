@@ -89,4 +89,25 @@ abstract class BattleNet extends AbstractProvider
             throw new IdentityProviderException($data['error_description'], $response->getStatusCode(), $data);
         }
     }
+
+    protected function getUrl($endPoint, $token, $options = [])
+    {
+        $defaultOptions = [
+            'region'    => $this->region,
+            'namespace' => 'profile-us',
+            'locale'    => 'en_US',
+        ];
+
+        $options = array_merge($defaultOptions, $options);
+
+        $endPoint = trim($endPoint, '/');
+        return sprintf(
+            'https://%s.api.blizzard.com/%s?namespace=%s&locale=%s&access_token=%s',
+            $options['region'],
+            $endPoint,
+            $options['namespace'],
+            $options['locale'],
+            $token
+        );
+    }
 }
